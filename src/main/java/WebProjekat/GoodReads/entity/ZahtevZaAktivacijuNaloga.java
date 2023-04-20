@@ -1,9 +1,6 @@
 package WebProjekat.GoodReads.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
@@ -23,4 +20,6 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
     private String poruka;
     private String datum;
     private Status status;
+    //@OneToOne
+    // private Autor autor;
 }

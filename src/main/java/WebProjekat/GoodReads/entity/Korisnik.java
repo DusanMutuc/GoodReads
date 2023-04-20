@@ -1,5 +1,6 @@
 package WebProjekat.GoodReads.entity;
-
+import java.util.Set;
+import java.util.HashSet;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ enum Uloga {
     Administrator
 }
 @Entity
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Korisnik implements Serializable {
 
     @Id
@@ -25,6 +27,19 @@ public class Korisnik implements Serializable {
     private String profilnaSlika;
     private String opis;
     private Uloga uloga;
+
+    @OneToMany
+    private Set <Polica> police = new HashSet<>();
+
+    public Korisnik(){
+        Polica p1 = new Polica("Want to read",true);
+        Polica p2 = new Polica("Currently Reading",true);
+        Polica p3 = new Polica("Read", true);
+        police.add(p1);
+        police.add(p2);
+        police.add(p3);
+    }
+
 
 
 }
