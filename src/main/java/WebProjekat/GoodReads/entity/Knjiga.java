@@ -20,10 +20,9 @@ public class Knjiga implements Serializable {
     private String Opis;
 
     @ManyToMany
-    //@JoinTable()
     private  Set<Zanr> Zanr = new HashSet<>();
-   // @ManyToOne
-    //private Autor autor;
+    @ManyToMany
+    private Set<Polica> polica = new HashSet<>();
     private double Ocena;
 
     public Long getID() {

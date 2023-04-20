@@ -24,8 +24,7 @@ public class Recenzija implements Serializable {
     private Knjiga knjiga;
 
     //veza izmedju recenzije i police
-    @ManyToMany
-    private Set<Polica> polica = new HashSet<>();
+
 
 
 }

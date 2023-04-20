@@ -19,7 +19,8 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
     private String Telefon;
     private String poruka;
     private String datum;
+    @Enumerated(EnumType.STRING)
     private Status status;
-    //@OneToOne
-    // private Autor autor;
+    @OneToOne
+    private Autor autor;
 }

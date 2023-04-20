@@ -16,11 +16,6 @@ public class Polica implements Serializable {
     private String Naziv;
     private boolean isPrimary;
 
-    Polica(String naziv, boolean isprimary){
-        Naziv = naziv;
-        isPrimary = isprimary;
-
-    }
 
     public long getID() {
         return ID;
