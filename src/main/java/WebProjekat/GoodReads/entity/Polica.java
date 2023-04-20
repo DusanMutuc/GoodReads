@@ -16,10 +16,6 @@ public class Polica implements Serializable {
     private String Naziv;
     private boolean isPrimary;
 
-
-    //TODO stavka police
-
-
     public long getID() {
         return ID;
     }

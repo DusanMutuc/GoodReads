@@ -1,12 +1,11 @@
 package WebProjekat.GoodReads.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+import java.util.Set;
+import java.util.HashSet;
 @Entity
 public class Recenzija implements Serializable {
     @Id
@@ -15,7 +14,18 @@ public class Recenzija implements Serializable {
     private Long ocena;
     private String tekst;
     private String datumRecenzije;
-    //TODO veza izmedju korisnika
+
+
+    //Umesto stavke police pravimo veze u samoj recenziji, ima mi vise smisla ovako jer
+    //Stavka police = knjiga + recenzija, sto mozemo postici samo dodavanjem veze sa knjigom u recenziji
+    @OneToOne
+    private Korisnik korisnik;
+    @OneToOne
+    private Knjiga knjiga;
+
+    //veza izmedju recenzije i police
+    @ManyToMany
+    private Set<Polica> polica = new HashSet<>();
 
 
 }

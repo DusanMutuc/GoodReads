@@ -22,9 +22,9 @@ public class Knjiga implements Serializable {
     @ManyToMany
     //@JoinTable()
     private  Set<Zanr> Zanr = new HashSet<>();
-    //TODO veza ka autoru
-    //TODO veza ka stavci
-    private Double Ocena;
+   // @ManyToOne
+    //private Autor autor;
+    private double Ocena;
 
     public Long getID() {
         return ID;
