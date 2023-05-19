@@ -11,19 +11,17 @@ public class Knjiga implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    private String Naslov;
-    private String NaslovnaFotografija;
+    private String naslov;
+    private String naslovnaFotografija;
     @Column(unique = true)
     private String ISBN;
-    private String DatumObjavljivanja;
-    private Long BrojStrana;
-    private String Opis;
+    private String datumObjavljivanja;
+    private Integer brojStrana;
+    private String opis;
 
     @ManyToMany
     private  Set<Zanr> Zanr = new HashSet<>();
-    @ManyToMany
-    private Set<Polica> polica = new HashSet<>();
-    private double Ocena;
+    private Float ocena;
 
     public Long getID() {
         return ID;
@@ -34,19 +32,19 @@ public class Knjiga implements Serializable {
     }
 
     public String getNaslov() {
-        return Naslov;
+        return naslov;
     }
 
     public void setNaslov(String naslov) {
-        Naslov = naslov;
+        naslov = naslov;
     }
 
     public String getNaslovnaFotografija() {
-        return NaslovnaFotografija;
+        return naslovnaFotografija;
     }
 
     public void setNaslovnaFotografija(String naslovnaFotografija) {
-        NaslovnaFotografija = naslovnaFotografija;
+        naslovnaFotografija = naslovnaFotografija;
     }
 
     public String getISBN() {
@@ -58,48 +56,48 @@ public class Knjiga implements Serializable {
     }
 
     public String getDatumObjavljivanja() {
-        return DatumObjavljivanja;
+        return datumObjavljivanja;
     }
 
     public void setDatumObjavljivanja(String datumObjavljivanja) {
-        DatumObjavljivanja = datumObjavljivanja;
+        datumObjavljivanja = datumObjavljivanja;
     }
 
-    public Long getBrojStrana() {
-        return BrojStrana;
+    public Integer getBrojStrana() {
+        return brojStrana;
     }
 
-    public void setBrojStrana(Long brojStrana) {
-        BrojStrana = brojStrana;
+    public void setBrojStrana(Integer brojStrana) {
+        brojStrana = brojStrana;
     }
 
     public String getOpis() {
-        return Opis;
+        return opis;
     }
 
     public void setOpis(String opis) {
-        Opis = opis;
+        opis = opis;
     }
 
-    public Double getOcena() {
-        return Ocena;
+    public Float getOcena() {
+        return ocena;
     }
 
-    public void setOcena(Double ocena) {
-        Ocena = ocena;
+    public void setOcena(Float ocena) {
+        ocena = ocena;
     }
 
     @Override
     public String toString() {
         return "Knjiga{" +
                 "ID=" + ID +
-                ", Naslov='" + Naslov + '\'' +
-                ", NaslovnaFotografija='" + NaslovnaFotografija + '\'' +
+                ", Naslov='" + naslov + '\'' +
+                ", NaslovnaFotografija='" + naslovnaFotografija + '\'' +
                 ", ISBN='" + ISBN + '\'' +
-                ", DatumObjavljivanja='" + DatumObjavljivanja + '\'' +
-                ", BrojStrana=" + BrojStrana +
-                ", Opis='" + Opis + '\'' +
-                ", Ocena=" + Ocena +
+                ", DatumObjavljivanja='" + datumObjavljivanja + '\'' +
+                ", BrojStrana=" + brojStrana +
+                ", Opis='" + opis + '\'' +
+                ", Ocena=" + ocena +
                 '}';
     }
 }

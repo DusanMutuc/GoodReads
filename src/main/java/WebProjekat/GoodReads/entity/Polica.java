@@ -1,11 +1,10 @@
 package WebProjekat.GoodReads.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Polica implements Serializable {
@@ -13,8 +12,13 @@ public class Polica implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    private String Naziv;
-    private boolean isPrimary;
+    private String naziv;
+    private Boolean primarna;
+
+    @OneToMany
+    @JoinColumn(name = "polica_ID")
+    private List<Stavka> stavke = new ArrayList<>();
+
 
 
     public long getID() {
@@ -26,27 +30,27 @@ public class Polica implements Serializable {
     }
 
     public String getNaziv() {
-        return Naziv;
+        return naziv;
     }
 
     public void setNaziv(String naziv) {
-        Naziv = naziv;
+        this.naziv = naziv;
     }
 
-    public boolean isPrimary() {
-        return isPrimary;
+    public Boolean getPrimarna() {
+        return primarna;
     }
 
-    public void setPrimary(boolean primary) {
-        isPrimary = primary;
+    public void setPrimarna(Boolean primarna) {
+        this.primarna = primarna;
     }
 
     @Override
     public String toString() {
         return "Polica{" +
                 "ID=" + ID +
-                ", Naziv='" + Naziv + '\'' +
-                ", isPrimary=" + isPrimary +
+                ", Naziv='" + naziv + '\'' +
+                ", Primarna=" + primarna +
                 '}';
     }
 }

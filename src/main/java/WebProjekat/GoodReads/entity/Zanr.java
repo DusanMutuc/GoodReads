@@ -11,7 +11,6 @@ public class Zanr implements Serializable {
     private Long ID;
     private String naziv;
 
-
     public long getID() {
         return ID;
     }

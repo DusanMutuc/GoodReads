@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
 @Entity
@@ -11,20 +12,50 @@ public class Recenzija implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    private Long ocena;
+    private Float ocena;
     private String tekst;
-    private String datumRecenzije;
+    private Date datumRecenzije;
 
-
-    //Umesto stavke police pravimo veze u samoj recenziji, ima mi vise smisla ovako jer
-    //Stavka police = knjiga + recenzija, sto mozemo postici samo dodavanjem veze sa knjigom u recenziji
-    @OneToOne
+    @ManyToOne
     private Korisnik korisnik;
-    @OneToOne
-    private Knjiga knjiga;
 
-    //veza izmedju recenzije i police
+    public Long getID() {
+        return ID;
+    }
 
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
 
+    public Float getOcena() {
+        return ocena;
+    }
 
+    public void setOcena(Float ocena) {
+        this.ocena = ocena;
+    }
+
+    public String getTekst() {
+        return tekst;
+    }
+
+    public void setTekst(String tekst) {
+        this.tekst = tekst;
+    }
+
+    public Date getDatumRecenzije() {
+        return datumRecenzije;
+    }
+
+    public void setDatumRecenzije(Date datumRecenzije) {
+        this.datumRecenzije = datumRecenzije;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 }
