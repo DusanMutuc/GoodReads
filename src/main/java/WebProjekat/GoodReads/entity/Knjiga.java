@@ -1,4 +1,5 @@
 package WebProjekat.GoodReads.entity;
+import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
 import jakarta.persistence.*;
@@ -15,7 +16,7 @@ public class Knjiga implements Serializable {
     private String naslovnaFotografija;
     @Column(unique = true)
     private String ISBN;
-    private String datumObjavljivanja;
+    private Date datumObjavljivanja;
     private Integer brojStrana;
     private String opis;
 
@@ -55,7 +56,7 @@ public class Knjiga implements Serializable {
         this.ISBN = ISBN;
     }
 
-    public String getDatumObjavljivanja() {
+    public Date getDatumObjavljivanja() {
         return datumObjavljivanja;
     }
 
@@ -85,6 +86,14 @@ public class Knjiga implements Serializable {
 
     public void setOcena(Float ocena) {
         ocena = ocena;
+    }
+
+    public Set<WebProjekat.GoodReads.entity.Zanr> getZanr() {
+        return Zanr;
+    }
+
+    public void setZanr(Set<WebProjekat.GoodReads.entity.Zanr> zanr) {
+        Zanr = zanr;
     }
 
     @Override

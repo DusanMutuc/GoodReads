@@ -17,7 +17,7 @@ public class Korisnik implements Serializable {
     @Column(unique = true)
     private String korisnickoIme;
     @Column(unique = true)
-    private String mailAdresa;
+    private String email;
     private String lozinka;
     private String datumRodjenja;
     private String profilnaSlika;
@@ -61,12 +61,12 @@ public class Korisnik implements Serializable {
         this.korisnickoIme = korisnickoIme;
     }
 
-    public String getMailAdresa() {
-        return mailAdresa;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMailAdresa(String mailAdresa) {
-        this.mailAdresa = mailAdresa;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLozinka() {
