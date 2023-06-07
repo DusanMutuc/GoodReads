@@ -29,9 +29,7 @@ public class Korisnik implements Serializable {
     @JoinColumn(name = "korisnikID",nullable = false)
     private Set <Polica> police = new HashSet<>();
 
-    public Long getID() {
-        return ID;
-    }
+    public Long getID() {return ID;}
 
     public void setID(Long ID) {
         this.ID = ID;

@@ -12,7 +12,7 @@ public class Test {
     @Autowired
     private KorisnikRepository korisnikRepository;
     public ResponseEntity login(String username, String pass){
-         Korisnik korisnik = korisnikRepository.findByKorisnickoIme(username);
+         Korisnik korisnik = korisnikRepository.findByKorisnickoIme(username).orElse(null);
          if (korisnik.getLozinka().equals(pass)){
             return new ResponseEntity(korisnik, HttpStatus.OK);
          }

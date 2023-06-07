@@ -1,10 +1,18 @@
 package WebProjekat.GoodReads.dto;
 
 import WebProjekat.GoodReads.entity.Korisnik;
+import WebProjekat.GoodReads.entity.Recenzija;
 
 public class RecenzijaDto {
     private String tekst;
     private float  ocena;
+
+
+
+    public RecenzijaDto(Recenzija recenzija){
+        this.tekst = recenzija.getTekst();
+        this.ocena = recenzija.getOcena();
+    }
 
     public String getTekst() {
         return tekst;

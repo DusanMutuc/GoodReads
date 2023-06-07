@@ -1,5 +1,6 @@
 package WebProjekat.GoodReads.entity;
 
+import WebProjekat.GoodReads.dto.ZahtevZaAktivacijuNalogaDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,6 +21,19 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
     private Status status;
     @ManyToOne
     private Autor autor;
+
+    public ZahtevZaAktivacijuNaloga(){
+        this.email = "";
+        this.telefon = "";
+        this.poruka = "";
+        this.datum = new Date();
+    }
+    public ZahtevZaAktivacijuNaloga(ZahtevZaAktivacijuNalogaDto dto){
+        this.email = dto.getEmail();
+        this.telefon = dto.getTelefon();
+        this.poruka = dto.getPoruka();
+        this.datum = new Date();
+    }
 
     public Long getID() {
         return ID;

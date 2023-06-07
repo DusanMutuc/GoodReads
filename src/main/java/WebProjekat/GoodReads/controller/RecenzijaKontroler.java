@@ -40,8 +40,9 @@ public class RecenzijaKontroler {
         // return new ResponseEntity<String>("Vi niste napisali recenziju",HttpStatus.BAD_REQUEST);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Recenzija> read(Long id){
-        return new ResponseEntity<Recenzija>(recenzijaService.findByID(id), HttpStatus.OK);
+    public ResponseEntity<RecenzijaDto> read(Long id){
+        RecenzijaDto dto = new RecenzijaDto(recenzijaService.findByID(id));
+        return new ResponseEntity<RecenzijaDto>(dto, HttpStatus.OK);
     }
 
 // ? korisnik  ? knjiga

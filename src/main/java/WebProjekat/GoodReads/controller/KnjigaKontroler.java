@@ -2,10 +2,13 @@ package WebProjekat.GoodReads.controller;
 
 import WebProjekat.GoodReads.dto.KnjigaDto;
 import WebProjekat.GoodReads.entity.Knjiga;
+import WebProjekat.GoodReads.entity.Korisnik;
+import WebProjekat.GoodReads.entity.Uloga;
 import WebProjekat.GoodReads.repository.KnjigaRepository;
 import WebProjekat.GoodReads.service.KnjigaService;
 import WebProjekat.GoodReads.service.RecenzijaService;
 import WebProjekat.GoodReads.service.ZanrService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +30,10 @@ public class KnjigaKontroler {
         return new ResponseEntity<KnjigaDto>(knjigaDto,HttpStatus.OK);
     }
     @PostMapping("/addGenre/")
-    public ResponseEntity<String> addGenre(@RequestParam Long zanrId, @RequestParam Long knjigaId){
+    public ResponseEntity<String> addGenre(@RequestParam Long zanrId, @RequestParam Long knjigaId, HttpSession session){
+        Korisnik korisnik =(Korisnik) session.getAttribute("korisnik");
+        if(korisnik == null) return new ResponseEntity<String>("Niste ulogovani", HttpStatus.BAD_REQUEST);
+        if (korisnik.getUloga()!= Uloga.ADMINISTRATOR) return new ResponseEntity<String>("Morate biti administrator",HttpStatus.BAD_REQUEST);
         if(knjigaService.findById(knjigaId) == null){
             return new ResponseEntity<String>("Ne postoji knjiga sa unetim ID-jem", HttpStatus.BAD_REQUEST);
         }
@@ -35,6 +41,6 @@ public class KnjigaKontroler {
             return new ResponseEntity<String>("Ne postoji zanr sa unetim ID-jem", HttpStatus.BAD_REQUEST);
         }
         knjigaService.addGenre(zanrId, knjigaId);
-        return new ResponseEntity<String>("bla",HttpStatus.OK);
+        return new ResponseEntity<String>("Uspesno ste dodali zanr na knjigu",HttpStatus.OK);
     }
 }

@@ -15,6 +15,11 @@ public class ZahtevZaAktivacijuNalogaDto {
         this.telefon = zahtevZaAktivacijuNaloga.getPoruka();
         this.poruka = zahtevZaAktivacijuNaloga.getPoruka();
     }
+    public ZahtevZaAktivacijuNalogaDto(String email, String telefon, String poruka){
+        this.email=email;
+        this.telefon = telefon;
+        this.poruka = poruka;
+    }
     public String getEmail() {
         return email;
     }
