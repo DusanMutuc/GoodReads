@@ -1,5 +1,7 @@
 package WebProjekat.GoodReads.controller;
 
+import WebProjekat.GoodReads.dto.KorisnikDto;
+import WebProjekat.GoodReads.dto.ZanrDto;
 import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Uloga;
 import WebProjekat.GoodReads.entity.Zanr;
@@ -33,8 +35,12 @@ public class ZanrKontroler {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Zanr> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(zanrService.findById(id));
+    public ResponseEntity<ZanrDto> findById(@PathVariable Long id) {
+
+        Zanr zanr = zanrService.findById(id);
+        if(zanr == null ) return new ResponseEntity<ZanrDto>(new ZanrDto(),HttpStatus.BAD_REQUEST);
+        ZanrDto dto = new ZanrDto(zanr);
+        return new ResponseEntity<ZanrDto>(dto,HttpStatus.OK);
     }
 
     @PostMapping("/{naziv}")

@@ -19,6 +19,18 @@ public class KnjigaDto {
         this.datumObjavljivanja = knjiga.getDatumObjavljivanja();
         this.opis = knjiga.getOpis();
     }
+    public KnjigaDto(){
+
+    }
+
+    public KnjigaDto(String naslov, String naslovnaFotografija, String ISBN, Date datumObjavljivanja, String opis) {
+        this.naslov = naslov;
+        this.naslovnaFotografija = naslovnaFotografija;
+        this.ISBN = ISBN;
+        this.datumObjavljivanja = datumObjavljivanja;
+        this.opis = opis;
+    }
+
     public String getNaslov() {
         return naslov;
     }

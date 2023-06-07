@@ -33,6 +33,7 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
         this.telefon = dto.getTelefon();
         this.poruka = dto.getPoruka();
         this.datum = new Date();
+        this.status = Status.NACEKANJU;
     }
 
     public Long getID() {

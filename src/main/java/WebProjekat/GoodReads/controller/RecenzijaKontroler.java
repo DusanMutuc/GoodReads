@@ -1,8 +1,10 @@
 package WebProjekat.GoodReads.controller;
 
 import WebProjekat.GoodReads.dto.RecenzijaDto;
+import WebProjekat.GoodReads.dto.ZanrDto;
 import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Recenzija;
+import WebProjekat.GoodReads.entity.Zanr;
 import WebProjekat.GoodReads.service.RecenzijaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class RecenzijaKontroler {
         recenzijaService.save(dto.getTekst(),dto.getOcena(),korisnik);
         return new ResponseEntity<String>("uspesno", HttpStatus.OK);
     }
-    @DeleteMapping("delete/{id}")
+    /*  @DeleteMapping("delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id, HttpSession session){
         Korisnik korisnik = (Korisnik) session.getAttribute( "korisnik");
         if(korisnik == null){
@@ -39,11 +41,16 @@ public class RecenzijaKontroler {
         return new ResponseEntity<String>(korisnik.getIme(),HttpStatus.OK);
         // return new ResponseEntity<String>("Vi niste napisali recenziju",HttpStatus.BAD_REQUEST);
     }
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<RecenzijaDto> read(Long id){
-        RecenzijaDto dto = new RecenzijaDto(recenzijaService.findByID(id));
-        return new ResponseEntity<RecenzijaDto>(dto, HttpStatus.OK);
+    public ResponseEntity<RecenzijaDto> findById(@PathVariable Long id){
+
+        Recenzija recenzija = recenzijaService.findById(id);
+        if(recenzija == null ) return new ResponseEntity<RecenzijaDto>(new RecenzijaDto(),HttpStatus.BAD_REQUEST);
+        RecenzijaDto dto = new RecenzijaDto(recenzija);
+        return new ResponseEntity<RecenzijaDto>(dto,HttpStatus.OK);
     }
+    //TODO za svaku knjigu moguce je videti njene recenzije
 
 // ? korisnik  ? knjiga
 

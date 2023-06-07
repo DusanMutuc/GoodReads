@@ -9,7 +9,7 @@ insert into polica (naziv,primarna,korisnikID) values('Want to Read',true,1);
 insert into polica(naziv, primarna,korisnikID) values('Currently Reading',true,1);
 insert into polica(naziv, primarna,korisnikID) values('Read',true,1);
 insert into polica(naziv, primarna,korisnikID) values('za mracne dane',false,1);
-insert into zahtev_za_aktivaciju_naloga(email,telefon,datum,poruka,status,autor_ID) values('peraPetric@gmail.com','0641234567','2023-2-2','pls aktivirajte',2,1);
+insert into zahtev_za_aktivaciju_naloga(email,telefon,datum,poruka,status,autor_ID) values('peraPetric@gmail.com','0641234567','2023-2-2','pls aktivirajte','NACEKANJU',1);
 insert into knjiga(broj_strana,datum_objavljivanja,isbn,naslov,naslovna_fotografija,ocena,opis,autorid) values(100,'1996-1-2',1234,'mars na drini','foto',10,'marsovci',1);
 insert into recenzija(datum_recenzije,ocena,tekst,korisnik_id) values('2023-2-10',8,'vrlo dobra',1);
 insert into knjiga(broj_strana,datum_objavljivanja,isbn,naslov,naslovna_fotografija,ocena,opis,autorid) values(90,'1954-3-3',1235,'drina na marsu','fotovideo',9,'drinovci',1);

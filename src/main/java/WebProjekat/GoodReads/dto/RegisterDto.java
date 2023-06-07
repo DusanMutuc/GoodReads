@@ -1,6 +1,7 @@
 package WebProjekat.GoodReads.dto;
 
 public class RegisterDto {
+
     private String ime;
     private String prezime;
     private String korisnickoIme;
@@ -9,6 +10,7 @@ public class RegisterDto {
     private String lozinkaConfirmation;
 
     RegisterDto(String ime, String prezime, String korisnickoIme, String mail, String lozinka, String lozinkaConfirmation){
+
         this.ime = ime;
         this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;

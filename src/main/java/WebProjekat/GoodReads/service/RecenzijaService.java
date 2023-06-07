@@ -22,7 +22,7 @@ public class RecenzijaService {
         recenzija = recenzijaRepository.save(recenzija);
         return recenzija;
     }
-    public Recenzija findByID(long id){
+    public Recenzija findById(long id){
         return recenzijaRepository.findById(id).orElse(null);
     }
     public void  delete(Long id) { recenzijaRepository.deleteById(id);}

@@ -1,6 +1,9 @@
 package WebProjekat.GoodReads.entity;
+import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
+
+import WebProjekat.GoodReads.dto.RegisterDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +22,7 @@ public class Korisnik implements Serializable {
     @Column(unique = true)
     private String email;
     private String lozinka;
-    private String datumRodjenja;
+    private Date datumRodjenja;
     private String profilnaSlika;
     private String opis;
     @Enumerated(EnumType.STRING)
@@ -29,6 +32,16 @@ public class Korisnik implements Serializable {
     @JoinColumn(name = "korisnikID",nullable = false)
     private Set <Polica> police = new HashSet<>();
 
+    public Korisnik(RegisterDto dto){
+        this.ime = dto.getIme();
+        this.prezime = dto.getPrezime();
+        this.korisnickoIme = dto.getKorisnickoIme();
+        this.email = dto.getMail();
+        this.lozinka = dto.getLozinka();
+    }
+    public Korisnik(){
+
+    }
     public Long getID() {return ID;}
 
     public void setID(Long ID) {
@@ -75,11 +88,11 @@ public class Korisnik implements Serializable {
         this.lozinka = lozinka;
     }
 
-    public String getDatumRodjenja() {
+    public Date getDatumRodjenja() {
         return datumRodjenja;
     }
 
-    public void setDatumRodjenja(String datumRodjenja) {
+    public void setDatumRodjenja(Date datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
     }
 

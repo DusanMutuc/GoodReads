@@ -14,6 +14,14 @@ public class RecenzijaDto {
         this.ocena = recenzija.getOcena();
     }
 
+    public RecenzijaDto(String tekst, float ocena) {
+        this.tekst = tekst;
+        this.ocena = ocena;
+    }
+    public RecenzijaDto(){
+
+    }
+
     public String getTekst() {
         return tekst;
     }
