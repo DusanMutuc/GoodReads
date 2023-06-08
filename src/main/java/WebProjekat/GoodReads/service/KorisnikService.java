@@ -50,4 +50,7 @@ public class KorisnikService {
     }
 
 
+    public void delete(Long id){
+        korisnikRepository.deleteById(id);
+    }
 }

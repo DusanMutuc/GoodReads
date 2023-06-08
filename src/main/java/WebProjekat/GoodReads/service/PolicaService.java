@@ -48,4 +48,10 @@ public class PolicaService {
         return null;
     }
 
+    public void deleteById(Long id){
+        policaRepository.deleteById(id);
+    }
+    public void deleteByNaziv(String naziv){
+        policaRepository.deleteByNaziv(naziv);
+    }
 }

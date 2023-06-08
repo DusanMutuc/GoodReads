@@ -33,6 +33,9 @@ public class StavkaService {
         }
         return recenzije;
     }
+    public void delete(Long id){
+        stavkaRepository.deleteById(id);
+    }
 
 
 

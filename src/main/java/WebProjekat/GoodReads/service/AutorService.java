@@ -16,5 +16,7 @@ public class AutorService {
     public void save(){
 
     }
-
+    public void delete(Long id){
+        autorRepository.deleteById(id);
+    }
 }
