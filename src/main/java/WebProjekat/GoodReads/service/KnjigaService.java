@@ -30,4 +30,7 @@ public class KnjigaService {
     public Knjiga save(Knjiga knjiga){
         return knjigaRepository.save(knjiga);
     }
+    public void delete(Long id){
+        knjigaRepository.deleteById(id);
+    }
 }
