@@ -34,4 +34,7 @@ public class KorisnikService {
         }
         return null;
     }
+    public void delete(Long id){
+        korisnikRepository.deleteById(id);
+    }
 }
