@@ -17,4 +17,11 @@ public class PolicaService {
     public Polica findById(Long id){
         return policaRepository.findById(id).orElse(null);
     }
+    public void deleteById(Long id){
+        policaRepository.deleteById(id);
+    }
+    public void deleteByNaziv(String naziv){
+        policaRepository.deleteByNaziv(naziv);
+    }
 }
+
