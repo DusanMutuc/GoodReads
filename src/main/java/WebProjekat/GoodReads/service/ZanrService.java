@@ -31,5 +31,8 @@ public class ZanrService {
     public Boolean exists(String naziv){
         return zanrRepository.findByNaziv(naziv).isPresent();
     }
+    public void delete(Long id){
+        zanrRepository.deleteById(id);
+    }
 
 }
