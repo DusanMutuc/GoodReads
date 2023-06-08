@@ -25,11 +25,11 @@ public class ZanrService {
     public Zanr findById(Long id){
         return zanrRepository.findById(id).orElse(null);
     }
-    public void delete(Long id){
-        zanrRepository.deleteById(id);
-    }
+
     public Boolean exists(String naziv){
         return zanrRepository.findByNaziv(naziv).isPresent();
     }
+
+
 
 }

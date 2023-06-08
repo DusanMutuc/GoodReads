@@ -1,22 +1,26 @@
 package WebProjekat.GoodReads.controller;
 
-import WebProjekat.GoodReads.dto.KorisnikDto;
-import WebProjekat.GoodReads.dto.LoginDto;
-import WebProjekat.GoodReads.dto.RegisterDto;
+import WebProjekat.GoodReads.dto.*;
 import WebProjekat.GoodReads.entity.Korisnik;
+import WebProjekat.GoodReads.entity.Polica;
 import WebProjekat.GoodReads.repository.KorisnikRepository;
 import WebProjekat.GoodReads.service.KorisnikService;
+import WebProjekat.GoodReads.service.PolicaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 public class KorisnikKontroler {
     @Autowired
     private KorisnikService korisnikService;
-
+    @Autowired
+    private PolicaService policaService;
     //TODO dodati uslov da ne sme login ako si vec prijavljen
     @PostMapping("/api/login")
     public ResponseEntity<String> login(@RequestBody LoginDto dto, HttpSession session){
@@ -40,7 +44,9 @@ public class KorisnikKontroler {
         }
         if(dto.getLozinka().equals(dto.getLozinkaConfirmation())) {
             Korisnik korisnik1 = new Korisnik(dto);
-            //TODO dodati 3 primarne police kad koncept police bude postojao :)
+            Set<Polica> police = new HashSet<>();
+            police = policaService.savePrimary();
+            korisnik1.setPolice(police);
             korisnikService.save(korisnik1);
             return new ResponseEntity<String>("Uspesno ste registrovani", HttpStatus.OK);
         }
@@ -52,5 +58,23 @@ public class KorisnikKontroler {
         if(korisnik == null ) return new ResponseEntity<KorisnikDto>(new KorisnikDto(),HttpStatus.BAD_REQUEST);
         KorisnikDto dto = new KorisnikDto(korisnik);
         return new ResponseEntity<KorisnikDto>(dto,HttpStatus.OK);
+    }
+    @PostMapping("/api/korisnik/addPolica")
+    public ResponseEntity<String>addPolica(@RequestParam String naziv, HttpSession session){
+        Korisnik korisnik =(Korisnik) session.getAttribute("korisnik");
+        Polica polica = new Polica(naziv);
+        if(korisnik == null){
+            return new ResponseEntity<String>("Niste ulogovani",HttpStatus.BAD_REQUEST);
+        }
+        if(policaService.containsPolicaByName(korisnik.getPolice(),naziv)){
+            return new ResponseEntity<String>("Vec imate policu sa tim nazivom", HttpStatus.BAD_REQUEST);
+        }
+        korisnik = korisnikService.addPolica(polica,korisnik);
+        korisnik = korisnikService.save(korisnik);
+        return new ResponseEntity<String>("Uspesno dodavanje police!", HttpStatus.OK);
+    }
+    @PostMapping("api/korisnik/police/addKnjiga/")
+    public ResponseEntity<String>addKnjiga(@RequestParam Long Knjigaid, @RequestParam String policaName ){
+        return new ResponseEntity<String>("bla",HttpStatus.OK);
     }
 }

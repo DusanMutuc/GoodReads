@@ -25,6 +25,6 @@ public class RecenzijaService {
     public Recenzija findById(long id){
         return recenzijaRepository.findById(id).orElse(null);
     }
-    public void  delete(Long id) { recenzijaRepository.deleteById(id);}
+
 
 }

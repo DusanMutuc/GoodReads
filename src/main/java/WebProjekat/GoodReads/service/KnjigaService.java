@@ -30,4 +30,5 @@ public class KnjigaService {
     public Knjiga save(Knjiga knjiga){
         return knjigaRepository.save(knjiga);
     }
+
 }

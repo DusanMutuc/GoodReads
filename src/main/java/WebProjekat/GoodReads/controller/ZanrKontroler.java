@@ -18,6 +18,8 @@ public class ZanrKontroler {
     @Autowired
     private ZanrService zanrService;
 
+    //Ne treba da se brisu zanrovi
+    /*
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id, HttpSession session) {
         Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
@@ -33,10 +35,9 @@ public class ZanrKontroler {
         zanrService.delete(id);
         return ResponseEntity.ok("Obrisano");
     }
-
+    */
     @GetMapping("/{id}")
     public ResponseEntity<ZanrDto> findById(@PathVariable Long id) {
-
         Zanr zanr = zanrService.findById(id);
         if(zanr == null ) return new ResponseEntity<ZanrDto>(new ZanrDto(),HttpStatus.BAD_REQUEST);
         ZanrDto dto = new ZanrDto(zanr);

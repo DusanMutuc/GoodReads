@@ -17,8 +17,8 @@ insert into recenzija(datum_recenzije,ocena,tekst,korisnik_ID) values('2023-1-3'
 insert into zanr(naziv) values('triler');
 insert into knjiga_zanr(knjiga_id, zanr_id) values(1,1);
 insert into knjiga_zanr(knjiga_id,zanr_id) values(2,2);
-insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,1,1);
-insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,2,2);
+insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,1,7);
+insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,2,7);
 insert into zanr (naziv) values('testBrisanje');
 
 

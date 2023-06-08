@@ -15,11 +15,28 @@ public class Polica implements Serializable {
     private String naziv;
     private Boolean primarna;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name = "polica_ID")
     private List<Stavka> stavke = new ArrayList<>();
 
+    public Polica(String naziv, Boolean primarna, List<Stavka> stavke) {
+        this.naziv = naziv;
+        this.primarna = primarna;
+        this.stavke = stavke;
+    }
 
+    public Polica(String naziv, Boolean primarna) {
+        this.naziv = naziv;
+        this.primarna = primarna;
+    }
+
+    public Polica(){
+
+    }
+    public Polica(String naziv){
+        this.naziv = naziv;
+        this.primarna = false;
+    }
 
     public long getID() {
         return ID;

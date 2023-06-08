@@ -1,11 +1,14 @@
 package WebProjekat.GoodReads.service;
 
 import WebProjekat.GoodReads.entity.Korisnik;
+import WebProjekat.GoodReads.entity.Polica;
 import WebProjekat.GoodReads.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class KorisnikService {
@@ -34,4 +37,17 @@ public class KorisnikService {
         }
         return null;
     }
+
+    public Korisnik addPolice(Set<Polica> police, Korisnik korisnik){
+        korisnik.setPolice(police);
+        return korisnik;
+    }
+    public Korisnik addPolica(Polica polica, Korisnik korisnik){
+        Set<Polica> police = korisnik.getPolice();
+        police.add(polica);
+        korisnik.setPolice(police);
+        return korisnik;
+    }
+
+
 }

@@ -13,7 +13,7 @@ public class Stavka implements Serializable {
     @ManyToOne
     private Knjiga knjiga;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Recenzija recenzija;
 
     public Long getID() {

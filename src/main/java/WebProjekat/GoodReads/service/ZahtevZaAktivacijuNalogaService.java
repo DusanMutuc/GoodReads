@@ -17,4 +17,5 @@ public class ZahtevZaAktivacijuNalogaService {
         return zahtevZaAktivacijuNalogaRepository.save(zahtevZaAktivacijuNaloga);
     }
 
+
 }

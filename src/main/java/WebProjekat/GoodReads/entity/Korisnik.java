@@ -28,7 +28,7 @@ public class Korisnik implements Serializable {
     @Enumerated(EnumType.STRING)
     private Uloga uloga;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "korisnikID",nullable = false)
     private Set <Polica> police = new HashSet<>();
 
