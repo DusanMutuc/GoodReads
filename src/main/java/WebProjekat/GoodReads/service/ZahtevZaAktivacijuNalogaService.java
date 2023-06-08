@@ -16,5 +16,8 @@ public class ZahtevZaAktivacijuNalogaService {
     public ZahtevZaAktivacijuNaloga save(ZahtevZaAktivacijuNaloga zahtevZaAktivacijuNaloga){
         return zahtevZaAktivacijuNalogaRepository.save(zahtevZaAktivacijuNaloga);
     }
+    public void delete(Long id){
+        zahtevZaAktivacijuNalogaRepository.deleteById(id);
+    }
 
 }
