@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 public class Autor extends Korisnik implements Serializable {
     private Boolean aktivan;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "autorID")
     private Set<Knjiga> spisakKnjiga= new HashSet<>();
 

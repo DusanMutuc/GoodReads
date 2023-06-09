@@ -44,8 +44,15 @@ public class ZanrKontroler {
         return new ResponseEntity<ZanrDto>(dto,HttpStatus.OK);
     }
 
-    @PostMapping("/{naziv}")
-    public ResponseEntity<String> add(@PathVariable String naziv) {
+    @PostMapping("/dodaj")
+    public ResponseEntity<String> dodajZanr(@RequestParam String naziv,HttpSession session) {
+        Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+        if(korisnik == null){
+            return new ResponseEntity<String>("Niste ulogovani!",HttpStatus.BAD_REQUEST);
+        }
+        if(!korisnik.getUloga().equals(Uloga.ADMINISTRATOR)){
+            return new ResponseEntity<String>("Niste admin!",HttpStatus.FORBIDDEN);
+        }
         if(zanrService.exists(naziv)){
             return new ResponseEntity<String>("zanr vec postoji",HttpStatus.BAD_REQUEST);
         }

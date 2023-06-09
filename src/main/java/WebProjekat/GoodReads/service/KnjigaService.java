@@ -33,4 +33,7 @@ public class KnjigaService {
     public void delete(Long id){
         knjigaRepository.deleteById(id);
     }
+    public Knjiga findByISBN(String isbn){
+        return knjigaRepository.findByIsbn(isbn);
+    }
 }

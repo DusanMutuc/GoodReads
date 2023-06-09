@@ -18,8 +18,10 @@ public class RecenzijaKontroler {
     @Autowired
     private RecenzijaService recenzijaService;
 
+
+    //recenzije ce se dodavati kada korisnik pomeri na Read policu, pa cemo proslediti o kojoj knjizi je rec, sada samo dodajemo
     @PostMapping("/post")
-    public ResponseEntity<String> add(@RequestBody RecenzijaDto dto, HttpSession session) {
+    public ResponseEntity<String> dodajRecenziju(@RequestBody RecenzijaDto dto, HttpSession session) {
         Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
         if(korisnik == null) return new ResponseEntity<String>("Niste ulogovani",HttpStatus.BAD_REQUEST);
         recenzijaService.save(dto.getTekst(),dto.getOcena(),korisnik);

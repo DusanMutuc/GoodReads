@@ -36,7 +36,7 @@ public class PolicaService {
         }
         return false;
     }
-    public Polica findByNaziv(String naziv){
+    public Set <Polica> findByNaziv(String naziv){
         return policaRepository.findByNaziv(naziv);
     }
     public Polica findByNazivInKorisnik(Set<Polica> police, String naziv){

@@ -15,7 +15,7 @@ public class Polica implements Serializable {
     private String naziv;
     private Boolean primarna;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "polica_ID")
     private List<Stavka> stavke = new ArrayList<>();
 
@@ -60,6 +60,18 @@ public class Polica implements Serializable {
 
     public void setPrimarna(Boolean primarna) {
         this.primarna = primarna;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    public List<Stavka> getStavke() {
+        return stavke;
+    }
+
+    public void setStavke(List<Stavka> stavke) {
+        this.stavke = stavke;
     }
 
     @Override

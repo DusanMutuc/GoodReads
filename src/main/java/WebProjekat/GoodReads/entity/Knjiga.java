@@ -2,6 +2,8 @@ package WebProjekat.GoodReads.entity;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
+
+import WebProjekat.GoodReads.dto.KnjigaDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,14 +17,26 @@ public class Knjiga implements Serializable {
     private String naslov;
     private String naslovnaFotografija;
     @Column(unique = true)
-    private String ISBN;
+    private String isbn;
     private Date datumObjavljivanja;
     private Integer brojStrana;
     private String opis;
 
-    @ManyToMany
+    @ManyToMany()
     private  Set<Zanr> Zanr = new HashSet<>();
     private Float ocena;
+
+    public Knjiga(){
+
+    }
+    public Knjiga(KnjigaDto dto){
+        this.naslov = dto.getNaslov();
+        this.naslovnaFotografija = dto.getNaslovnaFotografija();
+        this.isbn = dto.getIsbn();
+        this.datumObjavljivanja = dto.getDatumObjavljivanja();
+        this.opis = dto.getOpis();
+        this.brojStrana = dto.getBrojStrana();
+    }
 
     public Long getID() {
         return ID;
@@ -48,12 +62,12 @@ public class Knjiga implements Serializable {
         naslovnaFotografija = naslovnaFotografija;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String ISBN) {
+        this.isbn = ISBN;
     }
 
     public Date getDatumObjavljivanja() {
@@ -102,7 +116,7 @@ public class Knjiga implements Serializable {
                 "ID=" + ID +
                 ", Naslov='" + naslov + '\'' +
                 ", NaslovnaFotografija='" + naslovnaFotografija + '\'' +
-                ", ISBN='" + ISBN + '\'' +
+                ", ISBN='" + isbn + '\'' +
                 ", DatumObjavljivanja='" + datumObjavljivanja + '\'' +
                 ", BrojStrana=" + brojStrana +
                 ", Opis='" + opis + '\'' +

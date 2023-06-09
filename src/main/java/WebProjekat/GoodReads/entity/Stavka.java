@@ -16,6 +16,13 @@ public class Stavka implements Serializable {
     @OneToOne(cascade=CascadeType.ALL)
     private Recenzija recenzija;
 
+    public Stavka(Knjiga knjiga) {
+        this.knjiga = knjiga;
+    }
+
+    public Stavka() {
+    }
+
     public Long getID() {
         return ID;
     }

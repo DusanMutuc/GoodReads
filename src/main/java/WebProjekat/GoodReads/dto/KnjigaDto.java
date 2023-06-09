@@ -7,28 +7,31 @@ import java.util.Date;
 public class KnjigaDto {
     private String naslov;
     private String naslovnaFotografija;
-    private String ISBN;
+    private String isbn;
     private Date datumObjavljivanja;
     private String opis;
+    private Integer brojStrana;
 
 
     public KnjigaDto(Knjiga knjiga){
         this.naslov = knjiga.getNaslov();
         this.naslovnaFotografija = knjiga.getNaslovnaFotografija();
-        this.ISBN = knjiga.getISBN();
+        this.isbn = knjiga.getIsbn();
         this.datumObjavljivanja = knjiga.getDatumObjavljivanja();
         this.opis = knjiga.getOpis();
+        this.brojStrana = knjiga.getBrojStrana();
     }
     public KnjigaDto(){
 
     }
 
-    public KnjigaDto(String naslov, String naslovnaFotografija, String ISBN, Date datumObjavljivanja, String opis) {
+    public KnjigaDto(String naslov, String naslovnaFotografija, String isbn, Date datumObjavljivanja, String opis,Integer brojStrana) {
         this.naslov = naslov;
         this.naslovnaFotografija = naslovnaFotografija;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.datumObjavljivanja = datumObjavljivanja;
         this.opis = opis;
+        this.brojStrana = brojStrana;
     }
 
     public String getNaslov() {
@@ -47,12 +50,12 @@ public class KnjigaDto {
         this.naslovnaFotografija = naslovnaFotografija;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setisbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public Date getDatumObjavljivanja() {
@@ -69,5 +72,13 @@ public class KnjigaDto {
 
     public void setOpis(String opis) {
         this.opis = opis;
+    }
+
+    public Integer getBrojStrana() {
+        return brojStrana;
+    }
+
+    public void setBrojStrana(Integer brojStrana) {
+        this.brojStrana = brojStrana;
     }
 }

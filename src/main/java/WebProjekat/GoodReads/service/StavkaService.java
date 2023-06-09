@@ -29,6 +29,7 @@ public class StavkaService {
         List<Stavka> stavke =stavkaRepository.findByKnjigaID(id);
         List<RecenzijaDto> recenzije = new ArrayList<>();
         for(Stavka stavka : stavke){
+            if(stavka.getRecenzija()!=null)
             recenzije.add(new RecenzijaDto(stavka.getRecenzija()));
         }
         return recenzije;
