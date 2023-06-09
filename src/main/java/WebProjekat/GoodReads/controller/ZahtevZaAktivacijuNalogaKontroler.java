@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/zahtevi")
 public class ZahtevZaAktivacijuNalogaKontroler {
@@ -39,5 +41,9 @@ public class ZahtevZaAktivacijuNalogaKontroler {
         zahtevZaAktivacijuNaloga.setAutor(autorService.findById(dto.getIdAutor()));
         zahtevZaAktivacijuNaloga =zahtevZaAktivacijuNalogaService.save(zahtevZaAktivacijuNaloga);
         return new ResponseEntity<String>("Uspesno ste podneli zahtev!",HttpStatus.OK);
+    }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<ZahtevZaAktivacijuNaloga>> findAll(){
+        return new ResponseEntity<List<ZahtevZaAktivacijuNaloga>>(zahtevZaAktivacijuNalogaService.findAll(),HttpStatus.OK);
     }
 }

@@ -37,6 +37,7 @@ public class StavkaService {
     public void delete(Long id){
         stavkaRepository.deleteById(id);
     }
+    public List<Stavka> findAll(){ return stavkaRepository.findAll();}
 
 
 

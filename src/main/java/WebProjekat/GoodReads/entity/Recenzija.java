@@ -1,5 +1,6 @@
 package WebProjekat.GoodReads.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -50,7 +51,7 @@ public class Recenzija implements Serializable {
     public void setDatumRecenzije(Date datumRecenzije) {
         this.datumRecenzije = datumRecenzije;
     }
-
+    @JsonIgnore
     public Korisnik getKorisnik() {
         return korisnik;
     }

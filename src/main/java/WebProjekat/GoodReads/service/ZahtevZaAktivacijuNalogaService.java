@@ -5,6 +5,9 @@ import WebProjekat.GoodReads.repository.ZahtevZaAktivacijuNalogaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ZahtevZaAktivacijuNalogaService {
     @Autowired
@@ -18,6 +21,10 @@ public class ZahtevZaAktivacijuNalogaService {
     }
     public void delete(Long id){
         zahtevZaAktivacijuNalogaRepository.deleteById(id);
+    }
+    public List<ZahtevZaAktivacijuNaloga> findAll(){
+        return zahtevZaAktivacijuNalogaRepository.findAll();
+
     }
 
 

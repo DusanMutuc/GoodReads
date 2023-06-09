@@ -1,5 +1,6 @@
 package WebProjekat.GoodReads.service;
 
+import WebProjekat.GoodReads.dto.KnjigaDto;
 import WebProjekat.GoodReads.entity.Knjiga;
 import WebProjekat.GoodReads.entity.Zanr;
 import WebProjekat.GoodReads.repository.KnjigaRepository;
@@ -7,8 +8,10 @@ import WebProjekat.GoodReads.repository.ZanrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -35,5 +38,25 @@ public class KnjigaService {
     }
     public Knjiga findByISBN(String isbn){
         return knjigaRepository.findByIsbn(isbn);
+    }
+
+    public Knjiga azuriraj( Integer brojStrana, String naslov,  String opis,  String naslovnaFotografija, Long knjigaId){
+        Knjiga knjiga = knjigaRepository.findById(knjigaId).orElse(null);
+        if(brojStrana != null){
+            knjiga.setBrojStrana(brojStrana);
+        }
+        if(naslov != null){
+            knjiga.setNaslov(naslov);
+        }
+        if(opis!= null){
+            knjiga.setOpis(opis);
+        }
+        if(naslovnaFotografija != null){
+            knjiga.setNaslovnaFotografija(naslovnaFotografija);
+        }
+        return knjigaRepository.save(knjiga);
+    }
+    public List<Knjiga> findAll(){
+        return knjigaRepository.findAll();
     }
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import WebProjekat.GoodReads.dto.KnjigaDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public class Knjiga implements Serializable {
     private Integer brojStrana;
     private String opis;
 
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     private  Set<Zanr> Zanr = new HashSet<>();
     private Float ocena;
 
@@ -101,6 +102,7 @@ public class Knjiga implements Serializable {
     public void setOcena(Float ocena) {
         ocena = ocena;
     }
+
 
     public Set<WebProjekat.GoodReads.entity.Zanr> getZanr() {
         return Zanr;

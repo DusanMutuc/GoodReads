@@ -1,11 +1,13 @@
 package WebProjekat.GoodReads.service;
 
+import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Polica;
 import WebProjekat.GoodReads.repository.PolicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -54,4 +56,5 @@ public class PolicaService {
     public void deleteByNaziv(String naziv){
         policaRepository.deleteByNaziv(naziv);
     }
+
 }

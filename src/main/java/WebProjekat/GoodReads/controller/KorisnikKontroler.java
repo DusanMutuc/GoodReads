@@ -1,8 +1,10 @@
 package WebProjekat.GoodReads.controller;
 
 import WebProjekat.GoodReads.dto.*;
+import WebProjekat.GoodReads.entity.Knjiga;
 import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Polica;
+import WebProjekat.GoodReads.entity.Uloga;
 import WebProjekat.GoodReads.repository.KorisnikRepository;
 import WebProjekat.GoodReads.service.KnjigaService;
 import WebProjekat.GoodReads.service.KorisnikService;
@@ -70,6 +72,8 @@ public class KorisnikKontroler {
         }
         return new ResponseEntity<String>("Lozinke se ne poklapaju",HttpStatus.BAD_REQUEST);
     }
+
+    //TODO fali brisanje knjiga
 
     @GetMapping("/api/korisnici/{id}")
     public ResponseEntity<KorisnikDto> findById(@PathVariable Long id){
@@ -141,6 +145,35 @@ public class KorisnikKontroler {
         korisnikService.save(korisnik);
 
         return new ResponseEntity<String>("Uspesno Azuriranje!",HttpStatus.OK);
+    }
+
+    @GetMapping("/api/izlistajKorisnikovePolice")
+    public ResponseEntity<Set<Polica>> listAllPolice(HttpSession session){
+        Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+        if(korisnik == null){
+            Set<Polica> police = new HashSet<>();
+            return new ResponseEntity<Set<Polica>>(police,HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Set<Polica>>(korisnik.getPolice(),HttpStatus.OK);
+    }
+    @PostMapping("/api/azurirajKnjigu")
+    public ResponseEntity<String> azurirajKnjigu(@RequestParam Integer brojStrana, @RequestParam(required = false) String naslov, @RequestParam(required = false) String opis, @RequestParam(required = false) String naslovnaFotografija,@RequestParam Long knjigaId,HttpSession session){
+        Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+        if(korisnik == null){
+            return new ResponseEntity<String>("Niste ulogovani!",HttpStatus.BAD_REQUEST);
+        }
+        if(korisnik.getUloga().equals(Uloga.CITALAC)){
+            return new ResponseEntity<String>("Citalac ne moze da azurira knjige",HttpStatus.FORBIDDEN);
+        }
+        if(knjigaService.findById(knjigaId) == null){
+            return new ResponseEntity<String>("ne postoji knjiga sa tim Id-jem", HttpStatus.BAD_REQUEST);
+        }
+        Knjiga knjiga = knjigaService.findById(knjigaId);
+        knjiga =  knjigaService.azuriraj(brojStrana,naslov,opis,naslovnaFotografija,knjigaId);
+        knjigaService.save(knjiga);
+        korisnikService.save(korisnik);
+        return new ResponseEntity<String>("izvrseno azuriranje!", HttpStatus.OK);
+
     }
 
     //TODO dodavanje recenzije kada korisnik stavi knjigu na READ policu, za sada samo moguce dodavanje recenzija bez uslova u recenzijaKontroler

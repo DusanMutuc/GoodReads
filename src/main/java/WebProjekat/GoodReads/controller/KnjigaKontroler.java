@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,6 +30,8 @@ public class KnjigaKontroler {
     private StavkaService stavkaService;
     @Autowired
     private AutorService autorService;
+    @Autowired
+    private PolicaService policaService;
 
     @GetMapping("/{id}")
     public ResponseEntity<KnjigaDto> findById(@PathVariable Long id){
@@ -77,8 +81,26 @@ public class KnjigaKontroler {
             autorService.save(autor);
             return new ResponseEntity<String>("Uspesno ste dodali knjigu, Autore!",HttpStatus.OK);
         }
-        //knjigaService.save(knjiga);
+        knjigaService.save(knjiga);
         return new ResponseEntity<String>("Uspesno ste dodali knjigu",HttpStatus.OK);
 
+
+    }
+    @GetMapping("izlistajSve")
+    public ResponseEntity<List<Knjiga>> izlistajSve(){
+        return new ResponseEntity<List<Knjiga>>(knjigaService.findAll(),HttpStatus.OK);
+    }
+    @GetMapping("izlistajSveSaPolice")
+    public ResponseEntity<List<Knjiga>> izlistajSveSaPolice(Long policaId){
+        if(policaService.findById(policaId) == null){
+            List<Knjiga> knjige = new ArrayList<>();
+            return new ResponseEntity<List<Knjiga>>(knjige,HttpStatus.BAD_REQUEST);
+        }
+        List<Knjiga> knjige = new ArrayList<>();
+        Polica  polica = policaService.findById(policaId);
+        for(Stavka stavka : polica.getStavke()){
+            knjige.add(stavka.getKnjiga());
+        }
+        return new ResponseEntity<List<Knjiga>>(knjige,HttpStatus.OK);
     }
 }

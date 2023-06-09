@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/zanrovi")
 public class ZanrKontroler {
@@ -59,5 +61,9 @@ public class ZanrKontroler {
 
         zanrService.save(naziv);
         return new ResponseEntity<String>(naziv,HttpStatus.OK);
+    }
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Zanr>> findAll(){
+        return new ResponseEntity<List<Zanr>>(zanrService.findAll(),HttpStatus.OK);
     }
 }

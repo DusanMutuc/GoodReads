@@ -1,6 +1,7 @@
 package WebProjekat.GoodReads.entity;
 
 import WebProjekat.GoodReads.dto.ZahtevZaAktivacijuNalogaDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +20,8 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
     private Date datum;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @ManyToOne
+
+    @ManyToOne()
     private Autor autor;
 
     public ZahtevZaAktivacijuNaloga(){
@@ -84,6 +86,7 @@ public class ZahtevZaAktivacijuNaloga implements Serializable {
         this.status = status;
     }
 
+    @JsonIgnore
     public Autor getAutor() {
         return autor;
     }
