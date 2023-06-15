@@ -91,7 +91,7 @@ public class KnjigaKontroler {
         return new ResponseEntity<List<Knjiga>>(knjigaService.findAll(),HttpStatus.OK);
     }
     @GetMapping("izlistajSveSaPolice")
-    public ResponseEntity<List<Knjiga>> izlistajSveSaPolice(Long policaId){
+    public ResponseEntity<List<Knjiga>> izlistajSveSaPolice(@RequestParam Long policaId){
         if(policaService.findById(policaId) == null){
             List<Knjiga> knjige = new ArrayList<>();
             return new ResponseEntity<List<Knjiga>>(knjige,HttpStatus.BAD_REQUEST);
