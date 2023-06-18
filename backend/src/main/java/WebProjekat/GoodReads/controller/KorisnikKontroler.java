@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:8080/")
 @RestController
 public class KorisnikKontroler {
     @Autowired
