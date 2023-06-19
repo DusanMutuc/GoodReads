@@ -104,4 +104,13 @@ public class KnjigaKontroler {
         }
         return new ResponseEntity<List<Knjiga>>(knjige,HttpStatus.OK);
     }
+    @GetMapping("izlistajSvePoZanru")
+    public ResponseEntity<List<Knjiga>> izlistajSvePoZanru(@RequestParam String imeZanra){
+        Zanr zanr = zanrService.findByNaziv(imeZanra);
+        return new ResponseEntity<List<Knjiga>>(knjigaService.findByZanr(zanr),HttpStatus.OK);
+    }
+    @GetMapping("")
+    public ResponseEntity<Knjiga> findByNaziv(@RequestParam String naziv){
+        return new ResponseEntity<Knjiga>(knjigaService.findByNaslov(naziv),HttpStatus.OK);
+    }
 }

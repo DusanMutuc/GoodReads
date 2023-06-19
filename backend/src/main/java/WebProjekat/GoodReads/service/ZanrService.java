@@ -1,10 +1,12 @@
 package WebProjekat.GoodReads.service;
 
+import WebProjekat.GoodReads.entity.Knjiga;
 import WebProjekat.GoodReads.entity.Zanr;
 import WebProjekat.GoodReads.repository.ZanrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,9 @@ public class ZanrService {
     public Zanr findById(Long id){
         return zanrRepository.findById(id).orElse(null);
     }
-
+    public Zanr findByNaziv(String naziv){
+        return zanrRepository.findByNaziv(naziv).orElse(null);
+    }
     public Boolean exists(String naziv){
         return zanrRepository.findByNaziv(naziv).isPresent();
     }

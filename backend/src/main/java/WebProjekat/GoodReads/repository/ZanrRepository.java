@@ -1,5 +1,6 @@
 package WebProjekat.GoodReads.repository;
 
+import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Zanr;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,5 +9,4 @@ import java.util.Set;
 
 public interface ZanrRepository extends JpaRepository<Zanr, Long> {
     Optional<Zanr> findByNaziv(String naziv);
-
 }
