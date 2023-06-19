@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,7 +57,21 @@ public class KnjigaService {
         }
         return knjigaRepository.save(knjiga);
     }
+    public List<Knjiga> findByZanr(Zanr zanr){
+        List<Knjiga> knjige = new ArrayList<>();
+        for(Knjiga knjiga : knjigaRepository.findAll()){
+            for(Zanr zanr1 : knjiga.getZanr()){
+                if(zanr1.getNaziv().equals(zanr.getNaziv())){
+                    knjige.add(knjiga);
+                }
+            }
+        }
+        return knjige;
+    }
     public List<Knjiga> findAll(){
         return knjigaRepository.findAll();
+    }
+    public Knjiga findByNaslov(String naslov){
+        return knjigaRepository.findByNaslov(naslov).orElse(null);
     }
 }
