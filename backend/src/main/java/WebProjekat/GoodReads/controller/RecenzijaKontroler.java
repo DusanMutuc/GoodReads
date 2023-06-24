@@ -2,9 +2,11 @@ package WebProjekat.GoodReads.controller;
 
 import WebProjekat.GoodReads.dto.RecenzijaDto;
 import WebProjekat.GoodReads.dto.ZanrDto;
+import WebProjekat.GoodReads.entity.Knjiga;
 import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Recenzija;
 import WebProjekat.GoodReads.entity.Zanr;
+import WebProjekat.GoodReads.service.KnjigaService;
 import WebProjekat.GoodReads.service.RecenzijaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:8080/")
 @RestController
 @RequestMapping(value = "/api/recenzije")
 public class RecenzijaKontroler {
     @Autowired
     private RecenzijaService recenzijaService;
+    @Autowired
+    KnjigaService knjigaService;
 
 
     //recenzije ce se dodavati kada korisnik pomeri na Read policu, pa cemo proslediti o kojoj knjizi je rec, sada samo dodajemo
@@ -27,6 +33,14 @@ public class RecenzijaKontroler {
         if(korisnik == null) return new ResponseEntity<String>("Niste ulogovani",HttpStatus.BAD_REQUEST);
         recenzijaService.save(dto.getTekst(),dto.getOcena(),korisnik);
         return new ResponseEntity<String>("uspesno", HttpStatus.OK);
+    }
+    @GetMapping("/{knjiga}")
+    public ResponseEntity sveRecenzijePoKnjizi(@PathVariable String knjiga){
+        Knjiga knjiga1 = knjigaService.findByNaslov(knjiga);
+        if(knjiga1 == null){
+            return new ResponseEntity<String>("Ne postoji knjiga sa tim imenom",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Recenzija>>(recenzijaService.recenzijeOdKnjige(knjiga1),HttpStatus.OK);
     }
     /*  @DeleteMapping("delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id, HttpSession session){
@@ -45,14 +59,14 @@ public class RecenzijaKontroler {
         // return new ResponseEntity<String>("Vi niste napisali recenziju",HttpStatus.BAD_REQUEST);
     }
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<RecenzijaDto> findById(@PathVariable Long id){
-
-        Recenzija recenzija = recenzijaService.findById(id);
-        if(recenzija == null ) return new ResponseEntity<RecenzijaDto>(new RecenzijaDto(),HttpStatus.BAD_REQUEST);
-        RecenzijaDto dto = new RecenzijaDto(recenzija);
-        return new ResponseEntity<RecenzijaDto>(dto,HttpStatus.OK);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<RecenzijaDto> findById(@PathVariable Long id){
+//
+//        Recenzija recenzija = recenzijaService.findById(id);
+//        if(recenzija == null ) return new ResponseEntity<RecenzijaDto>(new RecenzijaDto(),HttpStatus.BAD_REQUEST);
+//        RecenzijaDto dto = new RecenzijaDto(recenzija);
+//        return new ResponseEntity<RecenzijaDto>(dto,HttpStatus.OK);
+//    }
     //TODO za svaku knjigu moguce je videti njene recenzije
 
 // ? korisnik  ? knjiga

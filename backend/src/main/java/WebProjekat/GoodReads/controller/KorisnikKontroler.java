@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:8080/")
@@ -31,7 +32,8 @@ public class KorisnikKontroler {
 
     //TODO dodati uslov da ne sme login ako si vec prijavljen
     @PostMapping("/api/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto dto, HttpSession session){
+    public ResponseEntity login(@RequestBody LoginDto dto, HttpSession session){
+        System.out.println(session.getId());
         Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
         if(korisnik != null){
             return new ResponseEntity<String>("Vec ste ulogovani!", HttpStatus.BAD_REQUEST);
@@ -41,7 +43,7 @@ public class KorisnikKontroler {
             return new ResponseEntity<String>("Podaci se ne poklapaju sa nalogom u sistemu", HttpStatus.BAD_REQUEST);
         }
         session.setAttribute("korisnik",korisnik);
-        return new ResponseEntity<String>("Uspesno prijavljeni",HttpStatus.OK);
+        return new ResponseEntity<>(new KorisnikDto(korisnik, session.getId()),HttpStatus.OK);
     }
 
     @PostMapping("api/logout")
@@ -155,7 +157,7 @@ public class KorisnikKontroler {
             Set<Polica> police = new HashSet<>();
             return new ResponseEntity<Set<Polica>>(police,HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Set<Polica>>(korisnik.getPolice(),HttpStatus.OK);
+        return new ResponseEntity<Set<Polica>>(korisnikService.findById(korisnik.getID()).getPolice(),HttpStatus.OK);
     }
     @PostMapping("/api/azurirajKnjigu")
     public ResponseEntity<String> azurirajKnjigu(@RequestParam Integer brojStrana, @RequestParam(required = false) String naslov, @RequestParam(required = false) String opis, @RequestParam(required = false) String naslovnaFotografija,@RequestParam Long knjigaId,HttpSession session){
@@ -174,9 +176,12 @@ public class KorisnikKontroler {
         knjigaService.save(knjiga);
         korisnikService.save(korisnik);
         return new ResponseEntity<String>("izvrseno azuriranje!", HttpStatus.OK);
-
     }
 
+    @GetMapping("/api/korisnik/{prezime}")
+    public ResponseEntity<List<Korisnik>> findByprezime(@PathVariable String prezime){
+        return new ResponseEntity<List<Korisnik>>(korisnikService.findByPrezime(prezime),HttpStatus.OK);
+    }
     //TODO dodavanje recenzije kada korisnik stavi knjigu na READ policu, za sada samo moguce dodavanje recenzija bez uslova u recenzijaKontroler
 
 

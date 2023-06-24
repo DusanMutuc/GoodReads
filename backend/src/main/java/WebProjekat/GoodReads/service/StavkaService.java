@@ -23,10 +23,10 @@ public class StavkaService {
         return stavkaRepository.findById(id).orElse(null);
     }
     public List<Stavka> findByKnjigaId(Long id){
-        return stavkaRepository.findByKnjigaID(id);
+        return stavkaRepository.findAllByKnjigaID(id);
     }
     public List<RecenzijaDto> recenzije(Long id){
-        List<Stavka> stavke =stavkaRepository.findByKnjigaID(id);
+        List<Stavka> stavke =stavkaRepository.findAllByKnjigaID(id);
         List<RecenzijaDto> recenzije = new ArrayList<>();
         for(Stavka stavka : stavke){
             if(stavka.getRecenzija()!=null)

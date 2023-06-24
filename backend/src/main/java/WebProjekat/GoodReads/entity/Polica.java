@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Polica implements Serializable {
@@ -17,9 +19,9 @@ public class Polica implements Serializable {
 
     @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "polica_ID")
-    private List<Stavka> stavke = new ArrayList<>();
+    private Set<Stavka> stavke = new HashSet<>();
 
-    public Polica(String naziv, Boolean primarna, List<Stavka> stavke) {
+    public Polica(String naziv, Boolean primarna, Set<Stavka> stavke) {
         this.naziv = naziv;
         this.primarna = primarna;
         this.stavke = stavke;
@@ -66,11 +68,11 @@ public class Polica implements Serializable {
         this.ID = ID;
     }
 
-    public List<Stavka> getStavke() {
+    public Set<Stavka> getStavke() {
         return stavke;
     }
 
-    public void setStavke(List<Stavka> stavke) {
+    public void setStavke(Set<Stavka> stavke) {
         this.stavke = stavke;
     }
 

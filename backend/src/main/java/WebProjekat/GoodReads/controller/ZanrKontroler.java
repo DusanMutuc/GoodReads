@@ -56,7 +56,7 @@ public class ZanrKontroler {
         if(!korisnik.getUloga().equals(Uloga.ADMINISTRATOR)){
             return new ResponseEntity<String>("Niste admin!",HttpStatus.FORBIDDEN);
         }
-        if(zanrService.exists(naziv)){
+        if(zanrService.findByNaziv(naziv) != null){
             return new ResponseEntity<String>("zanr vec postoji",HttpStatus.BAD_REQUEST);
         }
 

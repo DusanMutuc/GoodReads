@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StavkaRepository extends JpaRepository<Stavka, Long> {
-    List<Stavka> findByKnjigaID(Long id);
+    List<Stavka> findAllByKnjigaID(Long id);
 
 }

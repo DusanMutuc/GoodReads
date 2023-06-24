@@ -3,6 +3,7 @@ package WebProjekat.GoodReads.controller;
 import WebProjekat.GoodReads.dto.ZahtevZaAktivacijuNalogaDto;
 import WebProjekat.GoodReads.dto.ZahtevZaAktivacijuNalogaDto;
 import WebProjekat.GoodReads.entity.Korisnik;
+import WebProjekat.GoodReads.entity.Uloga;
 import WebProjekat.GoodReads.entity.ZahtevZaAktivacijuNaloga;
 import WebProjekat.GoodReads.entity.Zanr;
 import WebProjekat.GoodReads.repository.ZahtevZaAktivacijuNalogaRepository;
@@ -46,5 +47,27 @@ public class ZahtevZaAktivacijuNalogaKontroler {
     @GetMapping("/findAll")
     public ResponseEntity<List<ZahtevZaAktivacijuNaloga>> findAll(){
         return new ResponseEntity<List<ZahtevZaAktivacijuNaloga>>(zahtevZaAktivacijuNalogaService.findAll(),HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/odobri")
+    public ResponseEntity odobriZahtev(@PathVariable Long id, @RequestParam Boolean odobreno, HttpSession session) {
+        Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+
+        if (korisnik == null) {
+            return new ResponseEntity("Morate biti prijavljeni", HttpStatus.BAD_REQUEST);
+        }
+
+        if (!korisnik.getUloga().equals(Uloga.ADMINISTRATOR)) {
+            return new ResponseEntity("Morate biti administrator", HttpStatus.BAD_REQUEST);
+        }
+
+        ZahtevZaAktivacijuNaloga zahtev = zahtevZaAktivacijuNalogaService.findById(id);
+
+        if (zahtev == null) {
+            return new ResponseEntity("Nepostojeci zahtev", HttpStatus.BAD_REQUEST);
+        }
+
+        zahtevZaAktivacijuNalogaService.odobri(zahtev, odobreno);
+        return new ResponseEntity("Uspesno obradjeno", HttpStatus.OK);
     }
 }

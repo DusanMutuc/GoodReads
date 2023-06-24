@@ -76,10 +76,12 @@ public class KorisnikService {
             }
         }
         Stavka stavka1 = new Stavka(knjigaService.findById(knjigaId));
-        List<Stavka> stavke = polica1.getStavke();
+        Set<Stavka> stavke = polica1.getStavke();
         stavke.add(stavka1);
         polica1.setStavke(stavke);
-
+    }
+    public List<Korisnik> findByPrezime(String prezime){
+        return korisnikRepository.findAllByPrezime(prezime);
     }
 
     public void delete(Long id){

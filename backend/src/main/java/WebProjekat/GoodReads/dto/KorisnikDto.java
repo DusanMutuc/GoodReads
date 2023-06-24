@@ -2,6 +2,7 @@ package WebProjekat.GoodReads.dto;
 
 import WebProjekat.GoodReads.entity.Korisnik;
 import WebProjekat.GoodReads.entity.Polica;
+import WebProjekat.GoodReads.entity.Uloga;
 import jakarta.persistence.Column;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class KorisnikDto {
+    private Long id;
     private String ime;
     private String prezime;
     private String korisnickoIme;
@@ -16,6 +18,8 @@ public class KorisnikDto {
     private String profilnaSlika;
     private String opis;
     private Set<Polica> police = new HashSet<>();
+    private String cookie;
+    private Uloga uloga;
 
     public KorisnikDto(Korisnik korisnik){
         this.ime = korisnik.getIme();
@@ -25,6 +29,21 @@ public class KorisnikDto {
         this.profilnaSlika = korisnik.getProfilnaSlika();
         this.opis = korisnik.getOpis();
         this.police=korisnik.getPolice();
+        this.uloga = korisnik.getUloga();
+        this.id = korisnik.getID();
+    }
+
+    public KorisnikDto(Korisnik korisnik, String id){
+        this.ime = korisnik.getIme();
+        this.prezime = korisnik.getPrezime();
+        this.korisnickoIme = korisnik.getKorisnickoIme();
+        this.datumRodjenja = korisnik.getDatumRodjenja();
+        this.profilnaSlika = korisnik.getProfilnaSlika();
+        this.opis = korisnik.getOpis();
+        this.police=korisnik.getPolice();
+        this.cookie = id;
+        this.uloga = korisnik.getUloga();
+        this.id = korisnik.getID();
     }
     public KorisnikDto(){
 
@@ -84,5 +103,29 @@ public class KorisnikDto {
 
     public void setPolice(Set<Polica> police) {
         this.police = police;
+    }
+
+    public String getCookie() {
+        return cookie;
+    }
+
+    public void setCookie(String cookie) {
+        this.cookie = cookie;
+    }
+
+    public Uloga getUloga() {
+        return uloga;
+    }
+
+    public void setUloga(Uloga uloga) {
+        this.uloga = uloga;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

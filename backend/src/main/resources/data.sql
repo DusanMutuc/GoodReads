@@ -9,16 +9,21 @@ INSERT INTO zanr (naziv) VALUES ('Historyical Fiction');
 INSERT INTO zanr (naziv) VALUES ('Science');
 INSERT INTO zanr (naziv) VALUES ('Horror');
 insert into korisnik(datum_rodjenja,ime,korisnicko_ime,lozinka,email,opis,prezime,profilna_slika,uloga) values('1999-1-1','Dusan','DusanM','pass1234','email@gmail.com','pisac','mutuc','foto','ADMINISTRATOR');
+insert into korisnik(datum_rodjenja,ime,korisnicko_ime,lozinka,email,opis,prezime,profilna_slika,uloga) values('2012-12-12','Kraj','Svetic','Gotovo','finalniDan@gmail.com','ende','sveta','foto','AUTOR');
+insert into korisnik(datum_rodjenja,ime,korisnicko_ime,lozinka,email,opis,prezime,profilna_slika,uloga) values('1999-1-1','Dusan','DusanM2','pass1234','emaill@gmail.com','pisac','mutuc2','foto','ADMINISTRATOR');
 insert into polica (naziv, primarna,korisnikID) values('Want to Read',true,1);
 insert into polica(naziv, primarna,korisnikID) values('Currently Reading',true,1);
 insert into polica(naziv, primarna,korisnikID) values('Read',true,1);
-insert into korisnik(datum_rodjenja,ime,korisnicko_ime,lozinka,email,opis,prezime,profilna_slika,uloga) values('2012-12-12','Kraj','Svetic','Gotovo','finalniDan@gmail.com','ende','sveta','foto','AUTOR');
 insert into Autor(aktivan,id) values(true,1);
 insert into Autor(aktivan,id) values(true,2);
+insert into Autor(aktivan,id) values(true,3);
 insert into polica (naziv,primarna,korisnikID) values('Want to Read',true,2);
 insert into polica(naziv, primarna,korisnikID) values('Currently Reading',true,2);
 insert into polica(naziv, primarna,korisnikID) values('Read',true,2);
 insert into polica(naziv, primarna,korisnikID) values('za mracne dane',false,1);
+insert into polica (naziv,primarna,korisnikID) values('Want to Read',true,3);
+insert into polica(naziv, primarna,korisnikID) values('Currently Reading',true,3);
+insert into polica(naziv, primarna,korisnikID) values('Read',true,3);
 -- Book 1: Drama
 INSERT INTO knjiga(broj_strana, datum_objavljivanja, isbn, naslov, naslovna_fotografija, ocena, opis, autorid)
 VALUES (320, '2018-04-15', '978-0316438962', 'The Great Gatsby', 'great_gatsby.jpg', 4.5, 'A classic novel by F. Scott Fitzgerald depicting the Jazz Age.', 1);
@@ -164,7 +169,7 @@ INSERT INTO knjiga(broj_strana, datum_objavljivanja, isbn, naslov, naslovna_foto
 VALUES (352, '2017-09-05', '978-1250144284', 'Astrophysics for People in a Hurry', 'astrophysics_for_people_in_a_hurry.jpg', 4.5, 'A popular science book by Neil deGrasse Tyson that explores the fundamental concepts of astrophysics in a concise and accessible manner.', 1);
 INSERT INTO knjiga_zanr(knjiga_id, zanr_id) VALUES (29, 9);
 
--- Book 30: Horror
+
 -- Book 30: Horror
 INSERT INTO knjiga(broj_strana, datum_objavljivanja, isbn, naslov, naslovna_fotografija, ocena, opis, autorid)
 VALUES (432, '2014-04-15', '978-1476714813', 'Bird Box', 'bird_box.jpg', 4.2, 'A gripping horror novel by Josh Malerman, where unseen entities drive people to deadly violence if they catch a glimpse of them.', 2);
@@ -177,7 +182,7 @@ INSERT INTO knjiga_zanr(knjiga_id, zanr_id) VALUES (30, 10);
 insert into zahtev_za_aktivaciju_naloga(email,telefon,datum,poruka,status,autor_ID) values('peraPetric@gmail.com','0641234567','2023-2-2','pls aktivirajte','NACEKANJU',1);
 insert into recenzija(datum_recenzije,ocena,tekst,korisnik_id) values('2023-2-10',8,'vrlo dobra',1);
 insert into recenzija(datum_recenzije,ocena,tekst,korisnik_ID) values('2023-1-3',9,'odlicna knjiga',2);
-insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,1,7);
-insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,2,7);
+insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,1,4);
+insert into stavka(knjiga_id,recenzija_id,polica_id) values(1,2,4);
 
 
