@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'LoginView',
     data: function() {
@@ -21,17 +22,18 @@ export default {
         }
     },
     methods: {
-        submit: function() {
-            fetch('http://localhost:1237/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.LoginDto)
-            })
+        submit: async function() {
+            this.$cookies.remove('JSESSIONID')
+            await axios
+            .post('http://localhost:1237/api/login', this.LoginDto)
             .then(response => {
-                console.log(response)
-                this.$router.push('/logged')
+                console.log(response.data.cookie)
+                this.$cookies.set('JSESSIONID', response.data.cookie)
+                console.log(response.data.uloga)
+                this.$cookies.set('ULOGA', response.data.uloga)
+                console.log(response.data.id)
+                this.$cookies.set('ID', response.data.id)
+                this.$router.push('/profile')
             })
             .catch(error => {
                 console.log(error);

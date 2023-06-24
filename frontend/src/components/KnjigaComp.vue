@@ -3,6 +3,7 @@
         <h3>{{knjiga.naslov}}</h3><br/>
         <p>broj strana: {{knjiga.brojStrana}}</p><br/>
         <p>objavljeno: {{knjiga.datumObjavljivanja }}</p><br/>
+        <p v-if="ocena">ocena: {{ ocena }}</p><br/>
         <p>{{knjiga.opis }}</p>
     </div>
     <div v-else>
@@ -13,6 +14,6 @@
 <script>
 export default {
     name: 'KnjigaComp',
-    props: ["knjiga"]
+    props: ["knjiga", "ocena"]
 }
 </script>
